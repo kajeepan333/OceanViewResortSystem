@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0"
+         metadata-complete="false">
+
+    <display-name>Ocean View Resort - Online Room Reservation System</display-name>
+
+    <description>
+        A complete production-level Java Web Application for room reservation at Ocean View Resort.
+        Implements MVC architecture with multiple design patterns.
+    </description>
+
+    <!-- Welcome File List -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Session Configuration -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>false</secure>
+        </cookie-config>
+    </session-config>
+
+    <!-- Error Pages -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+
+    <!-- Security Constraints -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin Pages</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Staff Pages</web-resource-name>
+            <url-pattern>/staff/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMIN</role-name>
+            <role-name>STAFF</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- Context Parameters -->
+    <context-param>
+        <param-name>app.name</param-name>
+        <param-value>Ocean View Resort</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>app.version</param-name>
+        <param-value>1.0.0</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>support.email</param-name>
+        <param-value>support@oceanview.com</param-value>
+    </context-param>
+
+    <!-- MIME Type Mappings -->
+    <mime-mapping>
+        <extension>pdf</extension>
+        <mime-type>application/pdf</mime-type>
+    </mime-mapping>
+
+</web-app>
